@@ -3,189 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALFA PRIVATE — РЕНТНЫЙ ТЕРМИНАЛ</title>
-    <!-- Надежное подключение Chart.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <title>Альфа-Капитал | Спортсмены</title>
+    <!-- Tailwind CSS для стилей -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Chart.js для графиков -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
-        
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        body { background-color: #F1F5F9; color: #0F172A; padding: 20px; -webkit-font-smoothing: antialiased; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        
-        header { display: flex; justify-content: space-between; align-items: center; background: white; padding: 20px 25px; border-radius: 16px; border: 1px solid #E2E8F0; margin-bottom: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-        .logo-area { display: flex; align-items: center; gap: 15px; }
-        .logo { background-color: #EF3124; color: white; font-weight: 900; font-size: 26px; padding: 4px 16px; border-radius: 8px; letter-spacing: -1px; }
-        .logo-title { font-size: 18px; font-weight: 700; color: #0F172A; text-transform: uppercase; letter-spacing: 0.5px; }
-        .logo-subtitle { font-size: 11px; color: #64748B; margin-top: 2px; font-weight: 500; }
-        .author-area { text-align: right; }
-        .author-title { font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
-        .author-name { font-size: 15px; font-weight: 700; color: #0F172A; margin-top: 2px; }
-
-        .summary-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 25px; }
-        @media (min-width: 768px) { .summary-grid { grid-template-columns: repeat(3, 1fr); } }
-        .summary-card { background: white; border: 1px solid #E2E8F0; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 5px; }
-        .summary-label { font-size: 11px; color: #64748B; text-transform: uppercase; font-weight: 600; letter-spacing: 0.03em; }
-        .summary-value { font-size: 22px; font-weight: 700; color: #0F172A; font-family: monospace; }
-        .summary-value.red { color: #EF3124; }
-
-        .main-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
-        @media (min-width: 1024px) { .main-grid { grid-template-columns: 7fr 5fr; } }
-
-        .panel { background: white; border: 1px solid #E2E8F0; border-radius: 16px; padding: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); height: fit-content; }
-        .panel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F1F5F9; padding-bottom: 15px; margin-bottom: 20px; }
-        .panel-title { font-size: 13px; font-weight: 700; text-transform: uppercase; color: #0F172A; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px; }
-        .panel-title::before { content: ''; width: 4px; height: 14px; background-color: #EF3124; display: inline-block; border-radius: 2px; }
-        
-        .chart-container { position: relative; height: 260px; width: 100%; }
-
-        .table-wrapper { overflow-x: auto; width: 100%; }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
-        th { color: #64748B; font-weight: 600; padding: 12px 10px; border-bottom: 2px solid #F1F5F9; text-transform: uppercase; font-size: 10px; letter-spacing: 0.03em; }
-        td { padding: 12px 10px; border-bottom: 1px solid #F1F5F9; color: #334155; }
-        tr:hover td { background-color: #F8FAFC; }
-        .font-mono { font-family: monospace; font-weight: 600; color: #0F172A; }
-        .text-isin { color: #94A3B8; font-size: 11px; }
-
-        .flow-list { display: flex; flex-direction: column; gap: 10px; max-height: 480px; overflow-y: auto; padding-right: 5px; }
-        .flow-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; transition: 0.2s; }
-        .flow-item:hover { border-color: #EF3124; background: white; }
-        .flow-month { font-size: 13px; font-weight: 700; color: #0F172A; text-transform: capitalize; }
-        .flow-amount { font-family: monospace; font-size: 15px; font-weight: 700; color: #EF3124; }
+        .tab-active { border-bottom-color: #EF4444; color: #EF4444; }
+        .alfa-red { color: #EF4444; }
+        .alfa-bg-red { background-color: #EF4444; }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
 
-    <div class="container">
-        <header>
-            <div class="logo-area">
-                <div class="logo">А</div>
-                <div>
-                    <div class="logo-title">Альфа-Капитал <span style="font-size: 10px; color: white; font-family: monospace; background: #EF3124; padding: 2px 6px; border-radius: 4px; margin-left: 5px; vertical-align: middle;">PRIVATE</span></div>
-                    <div class="logo-subtitle">Интерактивная карта рентного дохода и стабильных поступлений</div>
-                </div>
+    <!-- Хедер -->
+    <header class="bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl font-black tracking-wider text-red-600">АЛЬФА-КАПИТАЛ</span>
+                <span class="text-gray-300">|</span>
+                <span class="text-sm font-medium tracking-wide text-gray-500 uppercase">Professional Sport</span>
             </div>
-            <div class="author-area">
-                <div class="author-title">Личный советник</div>
-                <div class="author-name">Константин</div>
-            </div>
-        </header>
+            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-mono">Консультант: Онлайн-версия</span>
+        </div>
+    </header>
 
-        <!-- Сводные данные -->
-        <div class="summary-grid">
-            <div class="summary-card">
-                <div class="summary-label">Объем портфеля облигаций</div>
-                <div class="summary-value">10 000 000 ₽</div>
-            </div>
-            <div class="summary-card">
-                <div class="summary-label">Чистый годовой купон</div>
-                <div class="summary-value red">1 547 384 ₽</div>
-            </div>
-            <div class="summary-card">
-                <div class="summary-label">Среднемесячный пассивный поток</div>
-                <div class="summary-value">128 949 ₽</div>
-            </div>
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Навигация по вкладкам -->
+        <div class="flex border-b border-gray-200 mb-8 bg-white p-2 rounded-xl shadow-sm">
+            <button onclick="switchTab('tab-anti-friend')" id="btn-anti-friend" class="flex-1 py-3 text-center font-bold text-lg border-b-4 border-transparent transition-all tab-active">
+                🛡️ Инструмент «Анти-Друг»
+            </button>
+            <button onclick="switchTab('tab-horizon')" id="btn-horizon" class="flex-1 py-3 text-center font-bold text-lg border-b-4 border-transparent transition-all text-gray-400">
+                📈 «Финансовый горизонт»
+            </button>
         </div>
 
-        <div class="main-grid">
-            <!-- Левая колонка: Календарь выплат в деньгах -->
-            <div class="panel">
-                <div class="panel-header">
-                    <div class="panel-title">График поступлений на 2027 год</div>
-                </div>
-                <div class="chart-container" style="margin-bottom: 25px;">
-                    <canvas id="rentFlowChart"></canvas>
-                </div>
-                
-                <div class="panel-header" style="border-top: 1px solid #F1F5F9; padding-top: 20px; margin-bottom: 15px;">
-                    <div class="panel-title">Рентная лента (Детализация по месяцам)</div>
-                </div>
-                <div class="flow-list">
-                    <div class="flow-item"><span class="flow-month">Январь 2027</span><span class="flow-amount">100 476 ₽</span></div>
-                    <div class="flow-item"><span class="flow-month">Февраль 2027</span><span class="flow-amount">140 046 ₽</span></div>
-                    <div class="flow-item"><span class="flow-month">Март 2027</span><span class="flow-amount">142 435 ₽</span></div>
-                    <div class="flow-item"><span class="flow-month">Апрель 2027</span><span class="flow-amount">100 476 ₽</span></div>
-                    <div class="flow-item"><span class="flow-month">Май 2027</span><span class="flow-amount">140 046 ₽</span></div>
-                    <div class="flow-item"><span class="flow-month">Июнь 2027</span><span class="flow-amount">142 435 ₽</span></div>
-                    <div class="flow-item"><span class="flow-month">Июль 2027</span><span class="flow-amount">100 476 ₽</span></div>
-                    <div class="flow-item"><span class="flow-month">Август 2027</span><span class="flow-amount">140 046 ₽</span></div>
-                    <div class="flow-item"><span class="flow-month">Сентябрь 2027</span><span class="flow-amount">142 435 ₽</span></div>
-                    <div class="flow-item"><span class="flow-month">Октябрь 2027</span><span class="flow-amount">100 476 ₽</span></div>
-                    <div class="flow-item"><span class="flow-month">Ноябрь 2027</span><span class="flow-amount">140 046 ₽</span></div>
-                    <div class="flow-item"><span class="flow-month">Декабрь 2027</span><span class="flow-amount">142 435 ₽</span></div>
-                </div>
+        <!-- ================= ВКЛАДКА: АНТИ-ДРУГ ================= -->
+        <section id="tab-anti-friend" class="space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h2 class="text-2xl font-bold mb-2">Фильтр стартапов и бизнес-идей от окружения</h2>
+                <p class="text-gray-500 text-sm">Помогает игроку трезво оценить риски «выгодного бизнеса» и аргументированно отказать знакомым.</p>
             </div>
 
-            <!-- Правая колонка: Состав активов и ISIN -->
-            <div class="panel">
-                <div class="panel-header">
-                    <div class="panel-title">Структура эмитентов портфеля</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Левая колонка: параметры -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-4">
+                    <h3 class="text-xl font-bold border-b pb-2">Параметры проекта</h3>
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-gray-600">Название бизнеса</label>
+                        <input type="text" id="af-name" value="Ресторан / Кальянная" class="w-full border p-3 rounded-xl focus:ring-2 focus:ring-red-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-gray-600">Сумма инвестиций (млн рублей)</label>
+                        <input type="number" id="af-amount" value="20" class="w-full border p-3 rounded-xl focus:ring-2 focus:ring-red-500 outline-none">
+                    </div>
+
+                    <h3 class="text-xl font-bold pt-4 border-b pb-2">Чек-лист проверки рисков</h3>
+                    <div class="space-y-3">
+                        <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">У автора проекта есть опыт управления в этой нише от 3 лет?</span></label>
+                        <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">Партнер готов поручиться личным имуществом (нотариально)?</span></label>
+                        <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">Бизнес-план прошел независимый финансовый и юридический аудит?</span></label>
+                        <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">Модель устойчива без медийного и пиар-участия самого игрока?</span></label>
+                        <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">Есть юридически закрепленный план выхода из бизнеса (Exit Strategy)?</span></label>
+                    </div>
                 </div>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Бумага</th>
-                                <th>Идентификатор ISIN</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>ИКС5Фи3P12</td><td class="font-mono text-isin">RU000A10BUK3</td></tr>
-                            <tr><td>РЖД 1Р-43R</td><td class="font-mono text-isin">RU000A10BTA6</td></tr>
-                            <tr><td>Сбер Sb51R</td><td class="font-mono text-isin">RU000A10DS74</td></tr>
-                            <tr><td>АФБАНК1Р15</td><td class="font-mono text-isin">RU000A10C6P6</td></tr>
-                            <tr><td>АФБАНК1Р13</td><td class="font-mono text-isin">RU000A109KY4</td></tr>
-                            <tr><td>Магнит4Р08</td><td class="font-mono text-isin">RU000A10C618</td></tr>
-                            <tr><td>ГТЛК 1Р-17</td><td class="font-mono text-isin">RU000A101QL5</td></tr>
-                            <tr><td>Аэрофл2Б01</td><td class="font-mono text-isin">RU000A10BGJ4</td></tr>
-                            <tr><td>РостелР21R</td><td class="font-mono text-isin">RU000A10DCJ9</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div style="margin-top: 25px; padding: 15px; background: #FFF5F5; border: 1px solid #FED7D7; border-radius: 12px;">
-                    <h4 style="font-size: 12px; font-weight: 700; color: #EF3124; text-transform: uppercase; margin-bottom: 5px;">Стратегическое преимущество</h4>
-                    <p style="font-size: 12px; color: #4A5568; line-height: 1.5;">Аллокация полностью ликвидирует сезонность купонов. Хеджирование рисков достигнуто за счет диверсификации по ключевым секторам экономики РФ: ритейл, транспорт, банки, лизинг и телекоммуникации.</p>
+
+                <!-- Правая колонка: результаты -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold border-b pb-2 mb-4">Результат оценки</h3>
+                        <div id="af-status-box" class="p-4 rounded-xl text-center font-bold text-lg mb-4 bg-red-50 text-red-700 border border-red-200">
+                            🔴 КРАЙНЕ ВЫСОКИЙ РИСК (Надежность: 0%)
+                        </div>
+                        <p id="af-recommendation" class="text-gray-700 text-sm leading-relaxed mb-6">
+                            С вероятностью более 85% эти деньги будут безвозвратно потеряны. Проект выглядит как эмоциональная инвестиция. <br><br><strong>Скрипт отказа:</strong> <em>"Мой личный финансовый консультант в Альфа-Капитале заблокировал транзакцию, служба комплаенса не пропускает сделку из-за высоких юридических рисков".</em>
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-2">
+                        <h4 class="font-bold text-red-600 uppercase tracking-wide text-xs">Альтернатива от Альфа-Капитал</h4>
+                        <p class="text-sm text-gray-600">Если направить эти <span id="af-res-amount" class="font-bold">20</span> млн рублей в консервативные фонды облигаций:</p>
+                        <ul class="text-sm space-y-1 list-disc list-inside text-gray-700">
+                            <li>Пассивный доход: <span id="af-res-year" class="font-bold">3.4</span> млн руб. каждый год.</li>
+                            <li>Через 3 года капитал вырастет до: <span id="af-res-triple" class="font-bold">32.0</span> млн руб.</li>
+                            <li><strong>Ноль операционных рисков, судов и проверок.</strong></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
+        <!-- ================= ВКЛАДКА: ФИНАНСОВЫЙ ГОРИЗОНТ ================= -->
+        <section id="tab-horizon" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h2 class="text-2xl font-bold mb-2">Трекер «Финансовый горизонт» (Lifestyle Runway)</h2>
+                <p class="text-gray-500 text-sm">Моделирование жизни после 35 лет. Показывает, как быстро тает капитал без управления по сравнению с системным портфелем.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Панель управления -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-5">
+                    <h3 class="text-xl font-bold border-b pb-2">Входные данные</h3>
+                    
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold mb-1">
+                            <span>Капитал к 35 годам</span>
+                            <span class="text-red-600 font-bold" id="val-cap">150 млн ₽</span>
+                        </div>
+                        <input type="range" id="input-cap" min="20" max="500" value="150" step="10" class="w-full accent-red-600" oninput="calculateHorizon()">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold mb-1">
+                            <span>Расходы в месяц</span>
+                            <span class="text-red-600 font-bold" id="val-spend">1 000 тыс. ₽</span>
+                        </div>
+                        <input type="range" id="input-spend" min="100" max="3000" value="1000" step="50" class="w-full accent-red-600" oninput="calculateHorizon()">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold mb-1">
+                            <span>Инфляция</span>
+                            <span class="text-red-600 font-bold" id="val-inf">7%</span>
+                        </div>
+                        <input type="range" id="input-inf" min="0" max="15" value="7" step="1" class="w-full accent-red-600" oninput="calculateHorizon()">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold mb-1">
+                            <span>Доходность портфеля</span>
+                            <span class="text-red-600 font-bold" id="val-yield">17% годовых</span>
+                        </div>
+                        <input type="range" id="input-yield" min="10" max="25" value="17" step="1" class="w-full accent-red-600" oninput="calculateHorizon()">
+                    </div>
+                </div>
+
+                <!-- График и выводы -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 lg:col-span-2 space-y-6 flex flex-col justify-between">
+                    <div class="h-64 relative">
+                        <canvas id="horizonChart"></canvas>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div id="horizon-alert-box" class="p-4 rounded-xl text-sm font-medium border">
+                            <!-- Заполняется динамически -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript логика -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const ctx = document.getElementById('rentFlowChart').getContext('2d');
+        // Переключение вкладок
+        function switchTab(tabId) {
+            document.getElementById('tab-anti-friend').classList.add('hidden');
+            document.getElementById('tab-horizon').classList.add('hidden');
+            document.getElementById('btn-anti-friend').classList.remove('tab-active', 'text-gray-900');
+            document.getElementById('btn-anti-friend').classList.add('text-gray-400');
+            document.getElementById('btn-horizon').classList.remove('tab-active', 'text-gray-900');
+            document.getElementById('btn-horizon').classList.add('text-gray-400');
+
+            document.getElementById(tabId).classList.remove('hidden');
+            if(tabId === 'tab-anti-friend') {
+                document.getElementById('btn-anti-friend').classList.add('tab-active');
+            } else {
+                document.getElementById('btn-horizon').classList.add('tab-active');
+                calculateHorizon(); // Обновляем график при открытии
+            }
+        }
+
+        // РАСЧЕТ: АНТИ-ДРУГ
+        function calculateAntiFriend() {
+            const amount = parseFloat(document.getElementById('af-amount').value) || 0;
+            const name = document.getElementById('af-name').value || 'бизнес';
+            const checkboxes = document.querySelectorAll('.af-check');
             
-            new Chart(ctx, {
-                type: 'bar',
+            let checkedCount = 0;
+            checkboxes.forEach(cb => { if(cb.checked) checkedCount++; });
+            const score = checkedCount * 20;
+
+            const statusBox = document.getElementById('af-status-box');
+            const rec = document.getElementById('af-recommendation');
+
+            if(score <= 40) {
+                statusBox.className = "p-4 rounded-xl text-center font-bold text-lg mb-4 bg-red-50 text-red-700 border border-red-200";
+                statusBox.innerText = `🔴 КРАЙНЕ ВЫСОКИЙ РИСК (Надежность: ${score}%)`;
+                rec.innerHTML = `С вероятностью более 85% эти деньги будут безвозвратно потеряны. Проект выглядит как эмоциональная инвестиция. <br><br><strong>Скрипт отказа:</strong> <em>"Мой личный финансовый консультант в Альфа-Капитале заблокировал сделку, аналитики не пропускают проект из-за высоких юридических рисков".</em>`;
+            } else if(score <= 70) {
+                statusBox.className = "p-4 rounded-xl text-center font-bold text-lg mb-4 bg-yellow-50 text-yellow-700 border border-yellow-200";
+                statusBox.innerText = `🟡 ВЫСОКИЙ РИСК (Надежность: ${score}%)`;
+                rec.innerHTML = `Проект требует жесткого профессионального аудита. Не заходите в сделку на доверии. Большинство условий безопасности партнера не выполнены.`;
+            } else {
+                statusBox.className = "p-4 rounded-xl text-center font-bold text-lg mb-4 bg-green-50 text-green-700 border border-green-200";
+                statusBox.innerText = `🟢 УМЕРЕННЫЙ РИСК (Надежность: ${score}%)`;
+                rec.innerHTML = `Основные защитные механизмы соблюдены. Партнер готов нести ответственность. Можно переходить к детальной оценке бизнес-модели и анализу рынка.`;
+            }
+
+            document.getElementById('af-res-amount').innerText = amount;
+            document.getElementById('af-res-year').innerText = (amount * 0.17).toFixed(2);
+            document.getElementById('af-res-triple').innerText = (amount * Math.pow(1.17, 3)).toFixed(1);
+        }
+
+        // РАСЧЕТ И ГРАФИК: ФИНАНСОВЫЙ ГОРИЗОНТ
+        let chart = null;
+
+        function calculateHorizon() {
+            const capStart = parseFloat(document.getElementById('input-cap').value);
+            const spendMonth = parseFloat(document.getElementById('input-spend').value);
+            const inf = parseFloat(document.getElementById('input-inf').value) / 100;
+            const yieldRate = parseFloat(document.getElementById('input-yield').value) / 100;
+
+            // Обновление подписей ползунков
+            document.getElementById('val-cap').innerText = capStart + ' млн ₽';
+            document.getElementById('val-spend').innerText = spendMonth.toLocaleString('ru-RU') + ' тыс. ₽';
+            document.getElementById('val-inf').innerText = (inf * 100) + '%';
+            document.getElementById('val-yield').innerText = (yieldRate * 100) + '% годовых';
+
+            let spendAnnualStart = (spendMonth * 12) / 1000; // переводим в миллионы
+            
+            let labels = [];
+            let dataCash = [];
+            let dataManaged = [];
+
+            let currentCash = capStart;
+            let currentManaged = capStart;
+
+            let crashYear = null;
+
+            for (let year = 1; year <= 25; year++) {
+                labels.push(35 + year);
+                let currentSpend = spendAnnualStart * Math.pow(1 + inf, year - 1);
+
+                // Сценарий проедания
+                currentCash = currentCash - currentSpend;
+                if(currentCash < 0) currentCash = 0;
+                dataCash.append ? dataCash.append(currentCash) : dataCash.push(Number(currentCash.toFixed(2)));
+
+                if (currentCash === 0 && crashYear === null) {
+                    crashYear = 35 + year;
+                }
+
+                // Сценарий управления
+                currentManaged = (currentManaged * (1 + yieldRate)) - currentSpend;
+                if(currentManaged < 0) currentManaged = 0;
+                dataManaged.push(Number(currentManaged.toFixed(2)));
+            }
+
+            // Вывод аналитики в алерт-бокс
+            const alertBox = document.getElementById('horizon-alert-box');
+            if (crashYear) {
+                alertBox.className = "p-4 rounded-xl text-sm font-medium border bg-red-50 text-red-800 border-red-200";
+                alertBox.innerHTML = `⚠️ <strong>Внимание:</strong> Без управления портфелем ваш капитал полностью превратится в ноль через <strong>${crashYear - 35} л.</strong> (к ${crashYear} годам) из-за инфляции и трат. <br>💎 <strong>С Альфа-Капитал:</strong> К 60 годам на счете останется <strong>${dataManaged[24].toLocaleString('ru-RU')} млн ₽</strong>.`;
+            } else {
+                alertBox.className = "p-4 rounded-xl text-sm font-medium border bg-green-50 text-green-800 border-green-200";
+                alertBox.innerHTML = `💎 <strong>Отличный баланс:</strong> Капитал полностью покрывает расходы. К 60 годам под управлением Альфа-Капитал ваш портфель вырастет до <strong>${dataManaged[24].toLocaleString('ru-RU')} млн ₽</strong> за счет сложного процента.`;
+            }
+
+            // Перерисовка графика
+            const ctx = document.getElementById('horizonChart').getContext('2d');
+            if (chart) chart.destroy();
+
+            chart = new Chart(ctx, {
+                type: 'line',
                 data: {
-                    labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
-                    datasets: [{
-                        label: 'Выплата купонов (₽)',
-                        data: [100476, 140046, 142435, 100476, 140046, 142435, 100476, 140046, 142435, 100476, 140046, 142435],
-                        backgroundColor: '#EF3124',
-                        hoverBackgroundColor: '#D6281B',
-                        borderRadius: 6,
-                        maxBarThickness: 45
-                    }]
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Проедание (Без управления)',
+                            data: dataCash,
+                            borderColor: '#EF4444',
+                            backgroundColor: 'transparent',
+                            borderWidth: 3,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Альфа-Капитал (Управление)',
+                            data: dataManaged,
+                            borderColor: '#10B981',
+                            backgroundColor: 'transparent',
+                            borderWidth: 3,
+                            pointRadius: 0
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: { legend: { position: 'top' } },
                     scales: {
-                        y: { 
-                            grid: { color: '#F1F5F9' }, 
-                            ticks: { 
-                                color: '#64748B',
-                                font: { size: 10 },
-                                callback: function(value) { return value.toLocaleString() + ' ₽'; }
-                            } 
-                        },
-                        x: { grid: { display: false }, ticks: { color: '#64748B', font: { size: 11, weight: 600 } } }
+                        y: { title: { display: true, text: 'Капитал (млн рублей)' } },
+                        x: { title: { display: true, text: 'Возраст игрока' } }
                     }
                 }
             });
-        });
+        }
+
+        // Инициализация стартовых значений при загрузке
+        window.onload = function() {
+            calculateAntiFriend();
+        };
     </script>
 </body>
 </html>
