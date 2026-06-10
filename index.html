@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Альфа-Капитал | Спортсмены</title>
-    <!-- Tailwind CSS для стилей -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Chart.js для графиков -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .tab-active { border-bottom-color: #EF4444; color: #EF4444; }
@@ -16,7 +14,6 @@
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased">
 
-    <!-- Хедер -->
     <header class="bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-50 shadow-sm">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3">
@@ -29,7 +26,6 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-4 py-8">
-        <!-- Навигация по вкладкам -->
         <div class="flex border-b border-gray-200 mb-8 bg-white p-2 rounded-xl shadow-sm">
             <button onclick="switchTab('tab-anti-friend')" id="btn-anti-friend" class="flex-1 py-3 text-center font-bold text-lg border-b-4 border-transparent transition-all tab-active">
                 💼 Бизнес-проект
@@ -39,7 +35,6 @@
             </button>
         </div>
 
-        <!-- ================= ВКЛАДКА: БИЗНЕС-ПРОЕКТ ================= -->
         <section id="tab-anti-friend" class="space-y-6">
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                 <h2 class="text-2xl font-bold mb-2">Анализ и оценка эффективности бизнес-проекта</h2>
@@ -47,7 +42,6 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Левая колонка: параметры и анкета -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-4 lg:col-span-2">
                     <h3 class="text-xl font-bold border-b pb-2">Параметры предложения</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -64,7 +58,6 @@
                     <h3 class="text-xl font-bold pt-4 border-b pb-2">15 критериев проверки рисков</h3>
                     
                     <div class="space-y-4">
-                        <!-- Блок 1: Управление и компетенции -->
                         <div class="bg-gray-50 p-3 rounded-xl space-y-2">
                             <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">1. Управление и компетенции</h4>
                             <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">У автора проекта есть подтвержденный успешный опыт операционного управления именно в этой сфере от 3-5 лет?</span></label>
@@ -72,7 +65,6 @@
                             <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">Партнер готов подписать нотариальное личное поручительство своим имуществом за возврат тела инвестиций?</span></label>
                         </div>
 
-                        <!-- Блок 2: Финансы и бизнес-модель -->
                         <div class="bg-gray-50 p-3 rounded-xl space-y-2">
                             <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">2. Финансы и бизнес-модель</h4>
                             <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">Финансовая модель и бизнес-план прошли независимый аудит у профильных сертифицированных специалистов?</span></label>
@@ -81,7 +73,6 @@
                             <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">Заявленная окупаемость проекта рассчитана на основе реальной рыночной статистики, а не завышенных обещаний?</span></label>
                         </div>
 
-                        <!-- Блок 3: Юридическая чистота -->
                         <div class="bg-gray-50 p-3 rounded-xl space-y-2">
                             <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">3. Юридическая безопасность</h4>
                             <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">Юридическая структура прозрачна (доля игрока оформляется напрямую в ООО/АО, а не через займы или "понятийные" расписки)?</span></label>
@@ -90,7 +81,6 @@
                             <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">У бизнеса есть зарегистрированный товарный знак и чистые права на интеллектуальную собственность?</span></label>
                         </div>
 
-                        <!-- Блок 4: Рыночные риски и выход -->
                         <div class="bg-gray-50 p-3 rounded-xl space-y-2">
                             <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">4. Операционная стабильность и выход</h4>
                             <label class="flex items-start space-x-3 cursor-pointer"><input type="checkbox" class="af-check mt-1 accent-red-600" onchange="calculateAntiFriend()"> <span class="text-sm">Модель бизнеса устойчива без постоянного личного пиара, рекламы и медийного присутствия самого игрока?</span></label>
@@ -101,7 +91,6 @@
                     </div>
                 </div>
 
-                <!-- Правая колонка: результаты -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between h-fit sticky top-24">
                     <div>
                         <h3 class="text-xl font-bold border-b pb-2 mb-4">Результат проверки</h3>
@@ -126,7 +115,6 @@
             </div>
         </section>
 
-        <!-- ================= ВКЛАДКА: ТРЕКЕР ФИНАНСОВЫЙ ГОРИЗОНТ ================= -->
         <section id="tab-horizon" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                 <h2 class="text-2xl font-bold mb-2">Трекер «Финансовый горизонт»</h2>
@@ -134,7 +122,6 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Панель управления -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-5">
                     <h3 class="text-xl font-bold border-b pb-2">Входные данные</h3>
                     
@@ -171,7 +158,6 @@
                     </div>
                 </div>
 
-                <!-- График и выводы -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 lg:col-span-2 space-y-6 flex flex-col justify-between">
                     <div class="h-80 relative">
                         <canvas id="horizonChart"></canvas>
@@ -179,17 +165,14 @@
 
                     <div class="space-y-3">
                         <div id="horizon-alert-box" class="p-4 rounded-xl text-sm font-medium border">
-                            <!-- Заполняется динамически -->
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- JavaScript логика -->
     <script>
-        // Переключение вкладок
         function switchTab(tabId) {
             document.getElementById('tab-anti-friend').classList.add('hidden');
             document.getElementById('tab-horizon').classList.add('hidden');
@@ -207,10 +190,8 @@
             }
         }
 
-        // РАСЧЕТ: БИЗНЕС-ПРОЕКТ
         function calculateAntiFriend() {
             const amount = parseFloat(document.getElementById('af-amount').value) || 0;
-            const name = document.getElementById('af-name').value || 'бизнес';
             const checkboxes = document.querySelectorAll('.af-check');
             
             let checkedCount = 0;
@@ -241,21 +222,22 @@
             document.getElementById('af-res-triple').innerText = (amount * Math.pow(1.17, 3)).toFixed(1);
         }
 
-        // РАСЧЕТ И ГРАФИК: ТРЕКЕР ФИНАНСОВЫЙ ГОРИЗОНТ
         let chart = null;
 
         function calculateHorizon() {
-            const capStart = parseFloat(document.getElementById('input-cap').value);
-            const spendMonth = parseFloat(document.getElementById('input-spend').value);
-            const inf = parseFloat(document.getElementById('input-inf').value) / 100;
-            const yieldRate = parseFloat(document.getElementById('input-yield').value) / 100;
+            // Принудительное округление входных данных для защиты от JS-глюков с плавающей точкой
+            const capStart = Math.round(parseFloat(document.getElementById('input-cap').value));
+            const spendMonth = Math.round(parseFloat(document.getElementById('input-spend').value));
+            const inf = Math.round(parseFloat(document.getElementById('input-inf').value)) / 100;
+            const yieldRate = Math.round(parseFloat(document.getElementById('input-yield').value)) / 100;
 
             document.getElementById('val-cap').innerText = capStart + ' млн ₽';
             document.getElementById('val-spend').innerText = spendMonth.toLocaleString('ru-RU') + ' тыс. ₽';
-            document.getElementById('val-inf').innerText = (inf * 100) + '%';
-            document.getElementById('val-yield').innerText = (yieldRate * 100) + '% годовых';
+            document.getElementById('val-inf').innerText = Math.round(inf * 100) + '%';
+            document.getElementById('val-yield').innerText = Math.round(yieldRate * 100) + '% годовых';
 
-            let spendAnnualStart = (spendMonth * 12) / 1000; 
+            // Перевод ежемесячных трат в миллионы
+            let baseMonthlySpend = spendMonth / 1000; 
             
             let labels = [];
             let dataCash = [];
@@ -267,22 +249,36 @@
             let crashYear = null;
             const horizonYears = 45; 
 
+            // Помесячные ставки для точного дисконтирования и начисления сложных процентов
+            const monthlyYield = Math.pow(1 + yieldRate, 1 / 12) - 1;
+
             for (let year = 1; year <= horizonYears; year++) {
                 labels.push(35 + year);
-                let currentSpend = spendAnnualStart * Math.pow(1 + inf, year - 1);
+                
+                // Инфляция увеличивает траты раз в год
+                let currentMonthlySpendWithInflation = baseMonthlySpend * Math.pow(1 + inf, year - 1);
 
-                // 1. Без управления
-                currentCash = currentCash - currentSpend;
-                if(currentCash < 0) currentCash = 0;
+                // 1. Моделирование года для Сценария 1: Проедание (Без управления)
+                for (let m = 0; m < 12; m++) {
+                    currentCash -= currentMonthlySpendWithInflation;
+                    if (currentCash < 0) currentCash = 0;
+                }
                 dataCash.push(Number(currentCash.toFixed(2)));
 
                 if (currentCash === 0 && crashYear === null) {
                     crashYear = 35 + year;
                 }
 
-                // 2. С управлением Альфа-Капитал
-                currentManaged = (currentManaged * (1 + yieldRate)) - currentSpend;
-                if(currentManaged < 0) currentManaged = 0;
+                // 2. Моделирование года для Сценария 2: Альфа-Капитал (Помесячный шаг)
+                for (let m = 0; m < 12; m++) {
+                    // Сначала списывается расход за месяц, затем на остаток начисляется месячный процент
+                    currentManaged -= currentMonthlySpendWithInflation;
+                    if (currentManaged > 0) {
+                        currentManaged *= (1 + monthlyYield);
+                    } else {
+                        currentManaged = 0;
+                    }
+                }
                 dataManaged.push(Number(currentManaged.toFixed(2)));
             }
 
@@ -291,7 +287,7 @@
 
             if (crashYear) {
                 alertBox.className = "p-4 rounded-xl text-sm font-medium border bg-red-50 text-red-800 border-red-200";
-                alertBox.innerHTML = `⚠️ <strong>Внимание:</strong> Без инвестиционного управления капитал полностью обнулится через <strong>${crashYear - 35} л.</strong> (к ${crashYear} годам) под воздействием трат и инфляции.<br>💎 <string>Стратегия Альфа-Капитал:</strong> К 80 годам на балансе останется <strong>${finalManagedValue.toLocaleString('ru-RU')} млн ₽</strong> благодаря росту за счет сложного процента.`;
+                alertBox.innerHTML = `⚠️ <strong>Внимание:</strong> Без инвестиционного управления капитал полностью обнулится через <strong>${crashYear - 35} л.</strong> (к ${crashYear} годам) под воздействием трат и инфляции.<br>💎 <strong>Стратегия Альфа-Капитал:</strong> К 80 годам на балансе останется <strong>${finalManagedValue.toLocaleString('ru-RU')} млн ₽</strong> благодаря росту за счет сложного процента.`;
             } else {
                 alertBox.className = "p-4 rounded-xl text-sm font-medium border bg-green-50 text-green-800 border-green-200";
                 alertBox.innerHTML = `💎 <strong>Инвестиционный расчет:</strong> Капитал полностью защищен. К 80 годам под управлением Альфа-Капитал ваш портфель вырастет до <strong>${finalManagedValue.toLocaleString('ru-RU')} млн ₽</strong>. Пассивный доход полностью перекрывает траты и сохраняет капитал для семьи.`;
