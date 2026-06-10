@@ -98,7 +98,7 @@
                             🔴 КРАЙНЕ ВЫСОКИЙ РИСК (0 из 15 критериев)
                         </div>
                         <p id="af-recommendation" class="text-gray-700 text-sm leading-relaxed mb-6">
-                            Заполни чек-лист слева, чтобы система проверила уровень финансовой безопасности проекта.
+                            Заполни чек-лист слева, чтобы система проверила уровень financial безопасности проекта.
                         </p>
                     </div>
 
@@ -118,7 +118,7 @@
         <section id="tab-horizon" class="hidden space-y-6">
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                 <h2 class="text-2xl font-bold mb-2">Трекер «Финансовый горизонт»</h2>
-                <p class="text-gray-500 text-sm">Долгосрочное моделирование капитала с 35 до 80 лет (горизонт 45 лет). Наглядно показывает динамику активов с учетом трат, инфляции и инвестиционного управления.</p>
+                <p class="text-gray-500 text-sm">Долгосрочное моделирование реальной стоимости капитала с 35 до 80 лет (горизонт 45 лет) в сегодняшних ценах, очищенных от инфляции.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -128,9 +128,9 @@
                     <div>
                         <div class="flex justify-between text-sm font-semibold mb-1">
                             <span>Капитал к концу карьеры (35 лет)</span>
-                            <span class="text-red-600 font-bold" id="val-cap">150 млн ₽</span>
+                            <span class="text-red-600 font-bold" id="val-cap">200 млн ₽</span>
                         </div>
-                        <input type="range" id="input-cap" min="20" max="500" value="150" step="10" class="w-full accent-red-600" oninput="calculateHorizon()">
+                        <input type="range" id="input-cap" min="20" max="500" value="200" step="10" class="w-full accent-red-600" oninput="calculateHorizon()">
                     </div>
 
                     <div>
@@ -144,17 +144,17 @@
                     <div>
                         <div class="flex justify-between text-sm font-semibold mb-1">
                             <span>Ожидаемая инфляция</span>
-                            <span class="text-red-600 font-bold" id="val-inf">7%</span>
+                            <span class="text-red-600 font-bold" id="val-inf">10%</span>
                         </div>
-                        <input type="range" id="input-inf" min="0" max="15" value="7" step="1" class="w-full accent-red-600" oninput="calculateHorizon()">
+                        <input type="range" id="input-inf" min="0" max="15" value="10" step="1" class="w-full accent-red-600" oninput="calculateHorizon()">
                     </div>
 
                     <div>
                         <div class="flex justify-between text-sm font-semibold mb-1">
                             <span>Доходность портфеля Альфа</span>
-                            <span class="text-red-600 font-bold" id="val-yield">17% годовых</span>
+                            <span class="text-red-600 font-bold" id="val-yield">14% годовых</span>
                         </div>
-                        <input type="range" id="input-yield" min="10" max="25" value="17" step="1" class="w-full accent-red-600" oninput="calculateHorizon()">
+                        <input type="range" id="input-yield" min="5" max="35" value="14" step="1" class="w-full accent-red-600" oninput="calculateHorizon()">
                     </div>
                 </div>
 
@@ -206,15 +206,15 @@
             if(checkedCount <= 5) {
                 statusBox.className = "p-4 rounded-xl text-center font-bold text-lg mb-4 bg-red-50 text-red-700 border border-red-200";
                 statusBox.innerText = `🔴 КРАЙНЕ ВЫСОКИЙ РИСК (${checkedCount} из ${totalQuestions} критериев — Надежность: ${pct}%)`;
-                rec.innerHTML = `Проект категорически не соответствует стандартам безопасности. С вероятностью >90% капитал игрока будет безвозвратно потерян из-за юридических рисков или отсутствия подтвержденных компетенций партнера. <br><br><strong>Скрипт защиты:</strong> <em>"Я бы с радостью поддержал, но мой инвест-консультант в Альфа-Капитале провел комплексную проверку по чек-листу. Проект заблокирован службой комплаенса и контроля рисков. Я юридически не имею права направлять туда активы".</em>`;
+                rec.innerHTML = `Проект категорически не соответствует стандартам безопасности. С вероятностью >90% капитал игрока будет безвозвратно потерян. <br><br><strong>Скрипт защиты:</strong> <em>"Мой инвест-консультант в Альфа-Капитале провел проверку рисков. Проект заблокирован комплаенсом. Я не имею права направлять туда активы".</em>`;
             } else if(checkedCount <= 11) {
                 statusBox.className = "p-4 rounded-xl text-center font-bold text-lg mb-4 bg-yellow-50 text-yellow-700 border border-yellow-200";
                 statusBox.innerText = `🟡 СРЕДНИЙ / ВЫСОКИЙ РИСК (${checkedCount} из ${totalQuestions} критериев — Надежность: ${pct}%)`;
-                rec.innerHTML = `Проект имеет критические уязвимости (например, нет личного имущественного поручительства или размыты юридические права). Заходить в сделку нельзя. Требуется жесткий пересмотр условий ответственности партнера.`;
+                rec.innerHTML = `Проект имеет критические уязвимости. Заходить в сделку нельзя. Требуется жесткий пересмотр условий ответственности партнера.`;
             } else {
                 statusBox.className = "p-4 rounded-xl text-center font-bold text-lg mb-4 bg-green-50 text-green-700 border border-green-200";
                 statusBox.innerText = `🟢 МИНИМАЛЬНЫЙ РИСК (${checkedCount} из ${totalQuestions} критериев — Надежность: ${pct}%)`;
-                rec.innerHTML = `Проект прошел детальный фильтр. Партнер берет на себя реальную финансовую и юридическую ответственность, бизнес-модель прозрачна. Можно переходить к финальной стадии юридического оформления сделки.`;
+                rec.innerHTML = `Проект прошел детальный фильтр. Можно переходить к финальной стадии юридического оформления сделки.`;
             }
 
             document.getElementById('af-res-amount').innerText = amount;
@@ -225,7 +225,6 @@
         let chart = null;
 
         function calculateHorizon() {
-            // Принудительное округление входных данных для защиты от JS-глюков с плавающей точкой
             const capStart = Math.round(parseFloat(document.getElementById('input-cap').value));
             const spendMonth = Math.round(parseFloat(document.getElementById('input-spend').value));
             const inf = Math.round(parseFloat(document.getElementById('input-inf').value)) / 100;
@@ -247,20 +246,24 @@
             let currentManaged = capStart;
 
             let crashYear = null;
+            let crashYearManaged = null;
             const horizonYears = 45; 
 
-            // Помесячные ставки для точного дисконтирования и начисления сложных процентов
-            const monthlyYield = Math.pow(1 + yieldRate, 1 / 12) - 1;
+            // Очищаем месячную доходность от инфляции для отображения РЕАЛЬНОГО капитала
+            // Фишер: (1 + r_real) = (1 + r_nom) / (1 + i)
+            const realYieldRate = (1 + yieldRate) / (1 + inf) - 1;
+            const monthlyRealYield = Math.pow(1 + realYieldRate, 1 / 12) - 1;
+            
+            // Для сценария проедания реальная ставка отрицательная (активы тают на величину инфляции)
+            const monthlyInfRate = Math.pow(1 + inf, 1 / 12) - 1;
 
             for (let year = 1; year <= horizonYears; year++) {
                 labels.push(35 + year);
                 
-                // Инфляция увеличивает траты раз в год
-                let currentMonthlySpendWithInflation = baseMonthlySpend * Math.pow(1 + inf, year - 1);
-
-                // 1. Моделирование года для Сценария 1: Проедание (Без управления)
+                // 1. Моделирование Сценария 1: Проедание без управления (в реальном выражении)
                 for (let m = 0; m < 12; m++) {
-                    currentCash -= currentMonthlySpendWithInflation;
+                    currentCash -= baseMonthlySpend; // Траты в базовых ценах фиксированы
+                    currentCash /= (1 + monthlyInfRate); // Тело обесценивается инфляцией
                     if (currentCash < 0) currentCash = 0;
                 }
                 dataCash.push(Number(currentCash.toFixed(2)));
@@ -269,29 +272,36 @@
                     crashYear = 35 + year;
                 }
 
-                // 2. Моделирование года для Сценария 2: Альфа-Капитал (Помесячный шаг)
+                // 2. Моделирование Сценария 2: Альфа-Капитал (с реальной доходностью после инфляции)
                 for (let m = 0; m < 12; m++) {
-                    // Сначала списывается расход за месяц, затем на остаток начисляется месячный процент
-                    currentManaged -= currentMonthlySpendWithInflation;
+                    currentManaged -= baseMonthlySpend; 
                     if (currentManaged > 0) {
-                        currentManaged *= (1 + monthlyYield);
+                        currentManaged *= (1 + monthlyRealYield);
                     } else {
                         currentManaged = 0;
                     }
                 }
                 dataManaged.push(Number(currentManaged.toFixed(2)));
+
+                if (currentManaged === 0 && crashYearManaged === null) {
+                    crashYearManaged = 35 + year;
+                }
             }
 
             const alertBox = document.getElementById('horizon-alert-box');
             let finalManagedValue = dataManaged[horizonYears - 1];
 
-            if (crashYear) {
+            let htmlAlert = `⚠️ <strong>Без управления:</strong> Капитал полностью обесценится через <strong>${crashYear ? crashYear - 35 : horizonYears} л.</strong> (к ${crashYear ? crashYear : 80} годам) под давлением трат и инфляции.<br>`;
+            
+            if (realYieldRate <= 0 || finalManagedValue === 0) {
+                let endAge = crashYearManaged ? crashYearManaged : 80;
                 alertBox.className = "p-4 rounded-xl text-sm font-medium border bg-red-50 text-red-800 border-red-200";
-                alertBox.innerHTML = `⚠️ <strong>Внимание:</strong> Без инвестиционного управления капитал полностью обнулится через <strong>${crashYear - 35} л.</strong> (к ${crashYear} годам) под воздействием трат и инфляции.<br>💎 <strong>Стратегия Альфа-Капитал:</strong> К 80 годам на балансе останется <strong>${finalManagedValue.toLocaleString('ru-RU')} млн ₽</strong> благодаря росту за счет сложного процента.`;
+                htmlAlert += `🛑 <strong>При доходности ${yieldRate*100}% и инфляции ${inf*100}%:</strong> Стратегия не покрывает отток. Капитал закончится к <strong>${endAge} годам</strong>. <em>Рекомендация: переведите ползунок на целевые продукты Альфа (от 21-27% годовых).</em>`;
             } else {
                 alertBox.className = "p-4 rounded-xl text-sm font-medium border bg-green-50 text-green-800 border-green-200";
-                alertBox.innerHTML = `💎 <strong>Инвестиционный расчет:</strong> Капитал полностью защищен. К 80 годам под управлением Альфа-Капитал ваш портфель вырастет до <strong>${finalManagedValue.toLocaleString('ru-RU')} млн ₽</strong>. Пассивный доход полностью перекрывает траты и сохраняет капитал для семьи.`;
+                htmlAlert += `💎 <strong>Стратегия Альфа-Капитал:</strong> Полная защита. К 80 годам покупательная способность вашего портфеля составит <strong>${finalManagedValue.toLocaleString('ru-RU')} млн ₽</strong> (в сегодняшних ценах). Капитал сохранен.`;
             }
+            alertBox.innerHTML = htmlAlert;
 
             const ctx = document.getElementById('horizonChart').getContext('2d');
             if (chart) chart.destroy();
@@ -310,7 +320,7 @@
                             pointRadius: 0
                         },
                         {
-                            label: 'Альфа-Капитал (Системный портфель)',
+                            label: 'Альфа-Капитал (В реальном выражении)',
                             data: dataManaged,
                             borderColor: '#10B981',
                             backgroundColor: 'transparent',
@@ -324,7 +334,7 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { position: 'top' } },
                     scales: {
-                        y: { title: { display: true, text: 'Остаток капитала (млн рублей)' } },
+                        y: { title: { display: true, text: 'Реальная покупательная способность (млн ₽)' } },
                         x: { title: { display: true, text: 'Возраст игрока' } }
                     }
                 }
